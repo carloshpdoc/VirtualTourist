@@ -13,4 +13,5 @@ class PhotoCell: UICollectionViewCell {
 
     @IBOutlet weak var photoVCImageView: UIImageView!
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 }

@@ -27,7 +27,9 @@ class Flickr: NSObject {
             "format": "json",
             "nojsoncallback": "1",
             "lat": "\(coordinate.latitude)",
-            "lon": "\(coordinate.longitude)"
+            "lon": "\(coordinate.longitude)",
+            "per_page": "20",
+            "page": "1",
         ]
         
         // Create session and request

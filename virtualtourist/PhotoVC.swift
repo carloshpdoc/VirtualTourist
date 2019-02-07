@@ -124,20 +124,26 @@ class PhotoVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCell
         
         let photo = fetchedResultsController.object(at: indexPath)
-        
+
         if let data = photo.data {
             cell.photoVCImageView.image = UIImage(data: data)
+            cell.activityIndicator.isHidden = true
+            cell.activityIndicator.stopAnimating()
         } else {
             cell.photoVCImageView.image = UIImage(named: "image")
             
             // Call Download Image Method
-            downloadImage(imagePath: photo.url!) { imageData, errorString in
-                if let imageData = imageData {
-                    DispatchQueue.main.async {
-                        cell.photoVCImageView.image = UIImage(data: imageData)
+            DispatchQueue.global().async {
+                self.downloadImage(imagePath: photo.url!) { imageData, errorString in
+                    if let imageData = imageData {
+                        DispatchQueue.main.async {
+                            cell.activityIndicator.isHidden = true
+                            cell.activityIndicator.stopAnimating()
+                            cell.photoVCImageView.image = UIImage(data: imageData)
+                        }
+                        photo.data = imageData
+                        try? self.dataController.viewContext.save()
                     }
-                    photo.data = imageData
-                    try? self.dataController.viewContext.save()
                 }
             }
         }
@@ -223,10 +229,7 @@ class PhotoVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     
     // Checks selected photos
     func hasSelectedPhotos() -> Bool {
-        if selectedPhotos.count == 0 {
-            return false
-        }
-        return true
+        return selectedPhotos.count != 0
     }
     
     // Deletes selected photos

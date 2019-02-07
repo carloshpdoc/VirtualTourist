@@ -50,7 +50,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="Zbu-g4-9YL" userLabel="PhotoCell" customClass="PhotoCell" customModule="VirtualTourist" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="Zbu-g4-9YL" userLabel="PhotoCell" customClass="PhotoCell" customModule="virtualtourist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -60,15 +60,21 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0bu-En-IVh">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                 </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="IyS-fV-KFU">
+                                                    <rect key="frame" x="40" y="40" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="0bu-En-IVh" firstAttribute="leading" secondItem="Zbu-g4-9YL" secondAttribute="leading" id="7nd-ZQ-Hqc"/>
+                                            <constraint firstItem="IyS-fV-KFU" firstAttribute="centerY" secondItem="0bu-En-IVh" secondAttribute="centerY" id="HJL-l8-EDw"/>
                                             <constraint firstAttribute="bottom" secondItem="0bu-En-IVh" secondAttribute="bottom" id="KwD-db-EVu"/>
                                             <constraint firstItem="0bu-En-IVh" firstAttribute="top" secondItem="Zbu-g4-9YL" secondAttribute="top" id="LdK-Np-GgC"/>
+                                            <constraint firstItem="IyS-fV-KFU" firstAttribute="centerX" secondItem="0bu-En-IVh" secondAttribute="centerX" id="eer-R2-X6e"/>
                                             <constraint firstAttribute="trailing" secondItem="0bu-En-IVh" secondAttribute="trailing" id="lyC-vf-puI"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="IyS-fV-KFU" id="uyc-VT-Ntt"/>
                                             <outlet property="photoVCImageView" destination="0bu-En-IVh" id="ydf-Cl-tZZ"/>
                                         </connections>
                                     </collectionViewCell>
