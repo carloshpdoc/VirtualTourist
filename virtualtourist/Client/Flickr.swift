@@ -9,30 +9,27 @@
 import Foundation
 import MapKit
 
-class Flickr: NSObject {
+class Flickr: NSObject {
     
     var session = URLSession.shared
-    var pageNumber = 0
     
     override init() {
         super.init()
-        pageNumber += 1
     }
 
 
     func getPhotos(coordinate: CLLocationCoordinate2D, completionHandler: @escaping (_ sucess: Bool, _ photos: [AnyObject?], _ error: NSError)-> Void)-> Void {
-
         let parameters: [String:String] = [
-            "api_key": "ea11b58e81bc8a3b25ec92f76fb786ba",
+            "api_key": "251146cadaed129b1f813d5b97b3ce6b",
             "method": "flickr.photos.search",
             "format": "json",
             "nojsoncallback": "1",
             "lat": "\(coordinate.latitude)",
             "lon": "\(coordinate.longitude)",
             "per_page": "20",
-            "page": "\(pageNumber)",
+            "page": "\(Int.random(in: 0 ... 100))",
         ]
-        
+       
         print("parameters ===== \(parameters)")
 
         // Create session and request
