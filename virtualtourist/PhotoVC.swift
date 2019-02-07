@@ -66,7 +66,7 @@ class PhotoVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     
     func loadPhotos() {
         
-        let flickrClient = Flickr.sharedInstance()
+        let flickrClient = Flickr()
         flickrClient.getPhotos(coordinate: CLLocationCoordinate2D(latitude: pin.latitude, longitude: pin.longitude)) { (success, photos, error) in
             
             if success == false {

@@ -12,20 +12,20 @@ import MapKit
 import CoreData
 
 class MapVC: UIViewController {
-        
-@IBOutlet weak var mapView: MKMapView!
-@IBOutlet weak var editButton: UIBarButtonItem!
-@IBOutlet weak var removePinBannerConstraint: NSLayoutConstraint!
-
-var dataController: DataController!
-var fetchedResultsController:NSFetchedResultsController<Pin>!
-var removePin = false
-
+    
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var removePinBannerConstraint: NSLayoutConstraint!
+    
+    var dataController: DataController!
+    var fetchedResultsController:NSFetchedResultsController<Pin>!
+    var removePin = false
+    
     override func viewDidLoad() {
         mapView.delegate = self
         setupFetchedResultsController()
     }
-
+    
     fileprivate func setupFetchedResultsController() {
         
         let fetchRequest: NSFetchRequest<Pin> = Pin.fetchRequest()
@@ -38,7 +38,7 @@ var removePin = false
             }
         }
     }
-
+    
     // MARK: Add Pin to Map
     @IBAction func pressMapAddPin(_ sender: UILongPressGestureRecognizer) {
         
@@ -48,7 +48,7 @@ var removePin = false
             let pin = Pin(context: dataController.viewContext)
             pin.latitude = Double(location.latitude)
             pin.longitude = Double(location.longitude)
-
+            
             try? dataController.viewContext.save()
             
             let annotation = MKPointAnnotation()
@@ -56,9 +56,9 @@ var removePin = false
             mapView.addAnnotation(annotation)
         }
     }
-
+    
     @IBAction func pressEdit(_ sender: Any) {
-
+        
         removePinBannerConstraint.constant = removePinBannerConstraint.constant == 0 ? -70.0 : 0
         editButton.title = removePinBannerConstraint.constant == 0 ? "Edit" : "Done"
         removePin = removePinBannerConstraint.constant == 0 ? false : true
@@ -68,10 +68,10 @@ var removePin = false
             self.view.layoutIfNeeded()
         }
     }
-    }
+}
 
 extension MapVC: MKMapViewDelegate {
-
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         var pinView: MKPinAnnotationView
@@ -86,7 +86,7 @@ extension MapVC: MKMapViewDelegate {
         
         return pinView
     }
-
+    
     // MARK: Pin Pressed
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
@@ -99,19 +99,19 @@ extension MapVC: MKMapViewDelegate {
             if let result = try? dataController.viewContext.fetch(fetchRequest),
                 let pin = result.first {
                 
-
+                
                 if removePin {
                     dataController.viewContext.delete(pin)
                     try? dataController.viewContext.save()
                     mapView.removeAnnotation(annotation)
-
+                    
                 } else {
                     performSegue(withIdentifier: "SeguePhotoVC", sender: pin )
                 }
             }
         }
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SeguePhotoVC" {
             let viewController = segue.destination as! PhotoVC
