@@ -81,7 +81,6 @@
 			children = (
 				6AA802AF220B869700C937EF /* MapVC.swift */,
 				6AA802B1220B86A200C937EF /* PhotoVC.swift */,
-				6AA802B3220B86CA00C937EF /* PhotoCell.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -89,6 +88,7 @@
 		6A0CB171220B491D00AF55B4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6AA802B3220B86CA00C937EF /* PhotoCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
